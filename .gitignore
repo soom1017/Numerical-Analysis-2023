@@ -1,0 +1,11 @@
+# vscode
+.vscode/
+
+# Mac OS
+.DS_Store
+
+# NRs: Numerical Analysis library from the book 'Numerical Analysis in C'
+NRs/
+
+# HW zip file
+*.zip
