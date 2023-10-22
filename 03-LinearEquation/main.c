@@ -43,7 +43,7 @@ void read_data(FILE *fp, float ***a, float **b, float ***b_2D, int *n) {
 
 /*
 Run linEq command: $ ./linEq [.dat file path] [type]
-- type: "gaussj" or "ludcmp" or "svdcmp" or "inverse" or "mprove"
+- type: "gaussj" or "ludcmp" or "svdcmp" or "inverse" or "mprove" or "det"
 */
 int main(int argc, char *argv[]){
     float **a, *b, **b_2D, d;
@@ -181,8 +181,15 @@ int main(int argc, char *argv[]){
             free(y[i]);
         free(col);
         free(indx);
+    } else if (!strcmp(argv[2], "det")) {
+        indx = (int *)malloc((n+1) * sizeof(int));
+        ludcmp(a, n, indx, &d);
+        for (i=1; i<=n; i++)
+            d *= a[i][i];
+        printf("Determinant of matrix A: %10.5f\n", d);
+        free(indx);
     } else {
-        fprintf(stderr, "Invalid type. Expected type value: [gaussj / ludcmp / svdcmp / inverse / mprove]");
+        fprintf(stderr, "Invalid type. Expected type value: [gaussj / ludcmp / svdcmp / inverse / mprove / det]");
     }
 
     for (i=1; i<=n; i++)
