@@ -3,7 +3,7 @@ OTHER_DIR = ../NRs/ansi/other
 SRCS = main.c $(SRC_DIR)/ran1.c $(SRC_DIR)/gasdev.c
 
 rnbGen : $(SRCS) ../NRs/ansi/other/nr.h
-	cc -o rnbGen $(SRCS)
+	cc -o rnbGen $(SRCS) -I $(OTHER_DIR)
 
 clean: 
 	rm -f rnbGen

@@ -4,11 +4,18 @@
 #include "nr.h"
 
 /*
-Run rnbGen command: $ ./rnbGen [# of samples]
+Run rnbGen command: $ ./rnbGen [# of samples] | python draw_histogram.py
+Make sure you have python matplot library.
 */
 int main(int argc, char *argv[]) {
+    if(argc != 2) {
+        printf("Usage: $ %s [# of samples]\n", argv[0]);
+        return 1;
+    }
     long idum = time(NULL);
+    printf("%ld\n", idum);
     int n_sample = atoi(argv[1]);
+    printf("num samples: %d\n", n_sample);
 
     // uniform in [a, b] / gaussian distribution with mean=m, stddev=s
     int a = -3;
@@ -23,12 +30,4 @@ int main(int argc, char *argv[]) {
     for(int i=0;i<n_sample;i++) {
         printf("%f ", gasdev(&idum) * s + m);
     }
- 
-    // gaussian distribution with mean=m, standard deviation=s
-
-    // Generate 1000 samples and draw a histogram (100 intervals for each distribution. a=-3, b=4, m=0.5, s=1.5)
-
-    // Repeat the same job with varing the number of samples (eg. 100, 10000, 100000)
-
-    // Discuss the shape of the histograms in terms of the number of samples. Ref to ch7
 }
